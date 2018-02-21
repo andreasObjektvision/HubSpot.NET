@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using Flurl;
 using HubSpot.NET.Api.Files.Dto;
+using HubSpot.NET.Core;
 using HubSpot.NET.Core.Interfaces;
 using RestSharp;
 
@@ -20,10 +22,10 @@ namespace HubSpot.NET.Api.Files
         /// </summary>
         /// <param name="entity">The file to upload</param>
         /// <returns>The uploaded file</returns>
-        public FileListHubSpotModel<T> Upload<T>(FileHubSpotModel entity) where T: FileHubSpotModel, new()
+        public T Upload<T>(T entity) where T: FileHubSpotModel, new()
         {
-            var path = $"{new FileHubSpotModel().RouteBasePath}/files";
-            var data = _client.ExecuteMultipart<FileListHubSpotModel<T>>(path, entity.File, entity.Name,
+            var path = $"{new T().RouteBasePath}/files";
+            var data = _client.ExecuteMultipart<T>(path, entity.File, entity.Name,
                 new Dictionary<string, string>()
                 {
                     {"overwrite", entity.Overwrite.ToString()},
@@ -43,7 +45,15 @@ namespace HubSpot.NET.Api.Files
             var path = $"{new FolderHubSpotModel().RouteBasePath}/folders";
             return _client.Execute<FolderHubSpotModel>(path, folder, Method.POST, false);
         }
-        
 
+        public FileListHubSpotModel<T> List<T>(ListRequestOptions opts = null) where T : FileHubSpotModel, new()
+        {
+            opts = opts ?? new ListRequestOptions();
+            var path = $"{new T().RouteBasePath}/files".SetQueryParam("limit", opts.Limit);
+            if (opts.Offset.HasValue)
+                path = path.SetQueryParam("offset", opts.Offset);
+            var data = _client.ExecuteList<FileListHubSpotModel<T>>(path, opts, Method.GET, false);
+            return data;
+        }
     }
 }
