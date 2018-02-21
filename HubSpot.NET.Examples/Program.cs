@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using HubSpot.NET.Api.Company.Dto;
 using HubSpot.NET.Api.Contact.Dto;
+using HubSpot.NET.Api.Deal.Dto;
 using HubSpot.NET.Api.Engagement.Dto;
 using HubSpot.NET.Api.Files.Dto;
 using HubSpot.NET.Core;

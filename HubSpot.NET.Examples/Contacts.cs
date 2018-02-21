@@ -47,7 +47,7 @@ namespace HubSpot.NET.Examples
             };
 
             var uploaded = api.File.Upload(file);
-            var fileId = uploaded.Objects.First().Id;
+            var fileId = uploaded.Id;
 
             /**
              * Add a Note engagement to a contact with a file attachment
@@ -82,7 +82,7 @@ namespace HubSpot.NET.Examples
             /**
              * Get all contacts
              */
-            var contacts = api.Contact.List<ContactListHubSpotModel>();
+            var contacts = api.Contact.List<ContactHubSpotModel>();
         }
     }
 }
