@@ -23,6 +23,8 @@ namespace HubSpot.NET.Examples
             Companies.Example();
 
             Contacts.Example();
+
+            CompanyProperties.Example();
         }
     }
 }
