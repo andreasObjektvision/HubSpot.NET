@@ -80,9 +80,13 @@ namespace HubSpot.NET.Examples
             api.Contact.Delete(contact.Id.Value);
 
             /**
-             * Get all contacts
+             * Get all contacts with specific properties
+             * By default only a few properties are returned
              */
-            var contacts = api.Contact.List<ContactHubSpotModel>();
+
+            var contacts = api.Contact.List<ContactHubSpotModel>(
+                new ListRequestOptions { PropertiesToInclude = new List<string> { "firstname", "lastname", "email"} });
+
         }
     }
 }
