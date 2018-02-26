@@ -83,15 +83,10 @@ namespace HubSpot.NET.Examples
              * Get all contacts with specific properties
              * By default only a few properties are returned
              */
-<<<<<<< HEAD
 
             var contacts = api.Contact.List<ContactHubSpotModel>(
                 new ListRequestOptions { PropertiesToInclude = new List<string> { "firstname", "lastname", "email"} });
 
-=======
-            var contacts = api.Contact.List<ContactHubSpotModel>(
-                new ListRequestOptions { PropertiesToInclude = new List<string> { "firstname", "lastname", "email" } });
->>>>>>> squaredup
         }
     }
 }
